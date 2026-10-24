@@ -15,7 +15,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [showHidden, setShowHidden] = useState(false);
-  const [ratingFilter, setRatingFilter] = useState('all'); // 'all' | 'visited' | 'unvisited' | 'good' | 'bad' | 'primary'
+  const [ratingFilter, setRatingFilter] = useState('all'); // 'all' | 'visited' | 'unvisited' | 'useful' | 'useless' | 'primary'
   const [cacheNotification, setCacheNotification] = useState(null);
   const [activeCache, setActiveCache] = useState(null);
   const [showCacheMenu, setShowCacheMenu] = useState(false);
@@ -197,8 +197,8 @@ function App() {
   
   const visitedCount = useMemo(() => visibleResults.filter(r => isResultVisited(r.url)).length, [visibleResults, visitedResults, resourceRatings]);
   const unvisitedCount = useMemo(() => visibleResults.filter(r => !isResultVisited(r.url) && !notRelevantResults[r.url]).length, [visibleResults, visitedResults, resourceRatings, notRelevantResults]);
-  const goodCount = useMemo(() => visibleResults.filter(r => resourceRatings[r.url] === 'good').length, [visibleResults, resourceRatings]);
-  const badCount = useMemo(() => visibleResults.filter(r => resourceRatings[r.url] === 'bad').length, [visibleResults, resourceRatings]);
+  const usefulCount = useMemo(() => visibleResults.filter(r => resourceRatings[r.url] === 'useful' || resourceRatings[r.url] === 'good').length, [visibleResults, resourceRatings]);
+  const uselessCount = useMemo(() => visibleResults.filter(r => resourceRatings[r.url] === 'useless' || resourceRatings[r.url] === 'bad').length, [visibleResults, resourceRatings]);
   const primaryCount = useMemo(() => visibleResults.filter(r => r.isPrimarySource).length, [visibleResults]);
   const notRelevantCount = useMemo(() => visibleResults.filter(r => notRelevantResults[r.url]).length, [visibleResults, notRelevantResults]);
 
@@ -206,8 +206,8 @@ function App() {
     return visibleResults.filter(r => {
       if (ratingFilter === 'visited') return isResultVisited(r.url);
       if (ratingFilter === 'unvisited') return !isResultVisited(r.url) && !notRelevantResults[r.url];
-      if (ratingFilter === 'good') return resourceRatings[r.url] === 'good';
-      if (ratingFilter === 'bad') return resourceRatings[r.url] === 'bad';
+      if (ratingFilter === 'useful' || ratingFilter === 'good') return resourceRatings[r.url] === 'useful' || resourceRatings[r.url] === 'good';
+      if (ratingFilter === 'useless' || ratingFilter === 'bad') return resourceRatings[r.url] === 'useless' || resourceRatings[r.url] === 'bad';
       if (ratingFilter === 'primary') return !!r.isPrimarySource;
       if (ratingFilter === 'not_relevant') return !!notRelevantResults[r.url];
       if (hideNotRelevant && notRelevantResults[r.url]) return false;
@@ -735,28 +735,28 @@ function App() {
 
                   <button
                     type="button"
-                    className={`v-filter-btn good ${ratingFilter === 'good' ? 'active' : ''}`}
-                    onClick={() => setRatingFilter(prev => prev === 'good' ? 'all' : 'good')}
-                    title="Show good results"
+                    className={`v-filter-btn useful ${(ratingFilter === 'useful' || ratingFilter === 'good') ? 'active' : ''}`}
+                    onClick={() => setRatingFilter(prev => (prev === 'useful' || prev === 'good') ? 'all' : 'useful')}
+                    title="Show useful results"
                   >
                     <span className="v-filter-left">
-                      <ThumbsUp size={13} strokeWidth={ratingFilter === 'good' ? 2.5 : 1.8} fill={ratingFilter === 'good' ? 'currentColor' : 'none'} />
-                      <span className="v-filter-name">Good</span>
+                      <ThumbsUp size={13} strokeWidth={(ratingFilter === 'useful' || ratingFilter === 'good') ? 2.5 : 1.8} fill={(ratingFilter === 'useful' || ratingFilter === 'good') ? 'currentColor' : 'none'} />
+                      <span className="v-filter-name">Useful</span>
                     </span>
-                    <span className="v-filter-count">{goodCount}</span>
+                    <span className="v-filter-count">{usefulCount}</span>
                   </button>
 
                   <button
                     type="button"
-                    className={`v-filter-btn bad ${ratingFilter === 'bad' ? 'active' : ''}`}
-                    onClick={() => setRatingFilter(prev => prev === 'bad' ? 'all' : 'bad')}
-                    title="Show bad results"
+                    className={`v-filter-btn useless ${(ratingFilter === 'useless' || ratingFilter === 'bad') ? 'active' : ''}`}
+                    onClick={() => setRatingFilter(prev => (prev === 'useless' || prev === 'bad') ? 'all' : 'useless')}
+                    title="Show useless results"
                   >
                     <span className="v-filter-left">
-                      <ThumbsDown size={13} strokeWidth={ratingFilter === 'bad' ? 2.5 : 1.8} fill={ratingFilter === 'bad' ? 'currentColor' : 'none'} />
-                      <span className="v-filter-name">Bad</span>
+                      <ThumbsDown size={13} strokeWidth={(ratingFilter === 'useless' || ratingFilter === 'bad') ? 2.5 : 1.8} fill={(ratingFilter === 'useless' || ratingFilter === 'bad') ? 'currentColor' : 'none'} />
+                      <span className="v-filter-name">Useless</span>
                     </span>
-                    <span className="v-filter-count">{badCount}</span>
+                    <span className="v-filter-count">{uselessCount}</span>
                   </button>
 
                   <button
@@ -899,7 +899,7 @@ function App() {
                     {displayedResults.length === 0 ? (
                       <div className="empty-filter-state animate-slide-up">
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                          No results found matching the <strong>"{ratingFilter === 'visited' ? 'Visited' : ratingFilter === 'unvisited' ? 'Not Visited' : ratingFilter === 'primary' ? 'Primary Sources' : ratingFilter === 'good' ? 'Good' : ratingFilter === 'bad' ? 'Bad' : 'Not Relevant'}"</strong> filter.
+                          No results found matching the <strong>"{ratingFilter === 'visited' ? 'Visited' : ratingFilter === 'unvisited' ? 'Not Visited' : ratingFilter === 'primary' ? 'Primary Sources' : (ratingFilter === 'useful' || ratingFilter === 'good') ? 'Useful' : (ratingFilter === 'useless' || ratingFilter === 'bad') ? 'Useless' : 'Not Relevant'}"</strong> filter.
                         </p>
                         <button 
                           className="secondary-btn" 

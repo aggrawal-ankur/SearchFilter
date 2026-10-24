@@ -146,7 +146,7 @@ export const storageService = {
     const ratings = await readJsonFile(RATINGS_FILE, {});
     let modified = false;
     for (const [url, rating] of Object.entries(ratingsMap)) {
-      if (url && (rating === 'good' || rating === 'bad')) {
+      if (url && (rating === 'good' || rating === 'bad' || rating === 'useful' || rating === 'useless')) {
         if (!ratings[url]) {
           ratings[url] = rating;
           modified = true;

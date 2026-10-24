@@ -28,7 +28,7 @@
 - [`backend/routes/bookmarksRoutes.js`](file:///home/username_anna/Desktop/SearchFilter/backend/routes/bookmarksRoutes.js) → [`backend/controllers/bookmarksController.js`](file:///home/username_anna/Desktop/SearchFilter/backend/controllers/bookmarksController.js):
   - `GET/POST/DELETE /api/bookmarks`: Saved result bookmarks.
 - [`backend/routes/ratingsRoutes.js`](file:///home/username_anna/Desktop/SearchFilter/backend/routes/ratingsRoutes.js) → [`backend/controllers/ratingsController.js`](file:///home/username_anna/Desktop/SearchFilter/backend/controllers/ratingsController.js):
-  - `GET/POST /api/ratings`, `POST /api/ratings/sync`: Good/Bad resource rating persistence (`ratings.json`).
+  - `GET/POST /api/ratings`, `POST /api/ratings/sync`: Useful/Useless resource rating persistence (`ratings.json`).
 - [`backend/routes/paywallsRoutes.js`](file:///home/username_anna/Desktop/SearchFilter/backend/routes/paywallsRoutes.js) → [`backend/controllers/paywallsController.js`](file:///home/username_anna/Desktop/SearchFilter/backend/controllers/paywallsController.js):
   - `GET/POST /api/paywalls`, `POST /api/paywalls/sync`: User-flagged paywall persistence (`paywalls.json`).
 - [`backend/routes/visitedRoutes.js`](file:///home/username_anna/Desktop/SearchFilter/backend/routes/visitedRoutes.js) → [`backend/controllers/visitedController.js`](file:///home/username_anna/Desktop/SearchFilter/backend/controllers/visitedController.js):
@@ -59,7 +59,7 @@
 
 ### Entry & Core
 - [`frontend/src/main.jsx`](file:///home/username_anna/Desktop/SearchFilter/frontend/src/main.jsx): React root mounting into `index.html`.
-- [`frontend/src/App.jsx`](file:///home/username_anna/Desktop/SearchFilter/frontend/src/App.jsx): Main application container. Manages active engine, query state, filter drawer toggles, rating, visit & relevance filter toggles (`All`, `Primary`, `Visited`, `Not Visited`, `Good`, `Bad`, `Not Relevant`), compact cache pill button with action popover (`Pin`, `Renew`, `Delete`), user-confirmed pagination prompt, bookmarks/history modals, theme toggle, and results grid.
+- [`frontend/src/App.jsx`](file:///home/username_anna/Desktop/SearchFilter/frontend/src/App.jsx): Main application container. Manages active engine, query state, filter drawer toggles, rating, visit & relevance filter toggles (`All`, `Primary`, `Visited`, `Not Visited`, `Useful`, `Useless`, `Not Relevant`), compact cache pill button with action popover (`Pin`, `Renew`, `Delete`), user-confirmed pagination prompt, bookmarks/history modals, theme toggle, and results grid.
 - [`frontend/src/api.js`](file:///home/username_anna/Desktop/SearchFilter/frontend/src/api.js): Centralized API client functions (`search`, `fetchPreferences`, `savePreference`, `fetchBookmarks`, `getVisited`, `setVisited`, `getNotRelevant`, `setNotRelevant`, etc.).
 - [`frontend/src/index.css`](file:///home/username_anna/Desktop/SearchFilter/frontend/src/index.css): Design tokens, theme variables (`--bg`, `--card-bg`, `--border-color`), layout styles, responsive media queries.
 - [`frontend/ui-registry.md`](file:///home/username_anna/Desktop/SearchFilter/frontend/ui-registry.md): Living design system specs, color tokens, and card geometry reference.
@@ -72,7 +72,7 @@
   - Search history dropdown with quick-clear and re-query.
 - [`ResultCard.jsx`](file:///home/username_anna/Desktop/SearchFilter/frontend/src/components/ResultCard.jsx):
   - Polymorphic card renderer tailored by result type (Web, YouTube video with duration, GitHub repo with stars/languages, Hacker News story with points).
-  - Bookmark toggle (`Save`/`Saved`), dedicated `Visited` toggle button (`.visited-btn` with `<Check size={13} />`), Good/Bad resource rating buttons (`👍 Good`/`👎 Bad`), dedicated `Not Relevant` toggle button (`.not-relevant-btn` with `<Ban size={12} />`), discreet manual paywall toggle button (`<Lock size={12} />`), authoritative `.primary-source-badge`, `.depth-badge` (`Deep Mechanics` / `Cliché Heavy`), direct research `.primary-pdf-badge`, paper author metadata, and expandable `.cluster-container` collapsing redundant 101 overviews.
+  - Bookmark toggle (`Save`/`Saved`), dedicated `Visited` toggle button (`.visited-btn` with `<Check size={13} />`), Useful/Useless resource rating buttons (`👍 Useful`/`👎 Useless`), dedicated `Not Relevant` toggle button (`.not-relevant-btn` with `<Ban size={12} />`), discreet manual paywall toggle button (`<Lock size={12} />`), authoritative `.primary-source-badge`, `.depth-badge` (`Deep Mechanics` / `Cliché Heavy`), direct research `.primary-pdf-badge`, paper author metadata, and expandable `.cluster-container` collapsing redundant 101 overviews.
 
 ---
 

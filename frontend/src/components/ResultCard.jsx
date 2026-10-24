@@ -19,7 +19,7 @@ export default function ResultCard({
   blockedChannels = []
 }) {
   const [isClusterExpanded, setIsClusterExpanded] = useState(false);
-  let cardClass = rating === 'good' ? ' is-good' : rating === 'bad' ? ' is-bad' : isVisited ? ' is-visited' : '';
+  let cardClass = (rating === 'good' || rating === 'useful') ? ' is-useful is-good' : (rating === 'bad' || rating === 'useless') ? ' is-useless is-bad' : isVisited ? ' is-visited' : '';
   if (isNotRelevant) {
     cardClass += ' is-not-relevant';
   }
@@ -65,21 +65,21 @@ export default function ResultCard({
                 <div className="rating-btn-group">
                   <button
                     type="button"
-                    className={`action-btn rating-btn like-btn ${rating === 'good' ? 'active' : ''}`}
-                    onClick={() => onRatingChange(rating === 'good' ? null : 'good')}
-                    title={rating === 'good' ? 'Good resource (click to remove)' : 'Rate as good resource'}
+                    className={`action-btn rating-btn like-btn ${(rating === 'good' || rating === 'useful') ? 'active' : ''}`}
+                    onClick={() => onRatingChange((rating === 'good' || rating === 'useful') ? null : 'useful')}
+                    title={(rating === 'good' || rating === 'useful') ? 'Useful resource (click to remove)' : 'Rate as useful resource'}
                   >
-                    <ThumbsUp size={13} strokeWidth={rating === 'good' ? 2.5 : 1.8} fill={rating === 'good' ? 'currentColor' : 'none'} />
-                    <span>Good</span>
+                    <ThumbsUp size={13} strokeWidth={(rating === 'good' || rating === 'useful') ? 2.5 : 1.8} fill={(rating === 'good' || rating === 'useful') ? 'currentColor' : 'none'} />
+                    <span>Useful</span>
                   </button>
                   <button
                     type="button"
-                    className={`action-btn rating-btn dislike-btn ${rating === 'bad' ? 'active' : ''}`}
-                    onClick={() => onRatingChange(rating === 'bad' ? null : 'bad')}
-                    title={rating === 'bad' ? 'Bad resource (click to remove)' : 'Rate as bad resource'}
+                    className={`action-btn rating-btn dislike-btn ${(rating === 'bad' || rating === 'useless') ? 'active' : ''}`}
+                    onClick={() => onRatingChange((rating === 'bad' || rating === 'useless') ? null : 'useless')}
+                    title={(rating === 'bad' || rating === 'useless') ? 'Useless resource (click to remove)' : 'Rate as useless resource'}
                   >
-                    <ThumbsDown size={13} strokeWidth={rating === 'bad' ? 2.5 : 1.8} fill={rating === 'bad' ? 'currentColor' : 'none'} />
-                    <span>Bad</span>
+                    <ThumbsDown size={13} strokeWidth={(rating === 'bad' || rating === 'useless') ? 2.5 : 1.8} fill={(rating === 'bad' || rating === 'useless') ? 'currentColor' : 'none'} />
+                    <span>Useless</span>
                   </button>
                 </div>
               )}
@@ -186,21 +186,21 @@ export default function ResultCard({
                 <div className="rating-btn-group">
                   <button
                     type="button"
-                    className={`action-btn rating-btn like-btn ${rating === 'good' ? 'active' : ''}`}
-                    onClick={() => onRatingChange(rating === 'good' ? null : 'good')}
-                    title={rating === 'good' ? 'Good resource (click to remove)' : 'Rate as good resource'}
+                    className={`action-btn rating-btn like-btn ${(rating === 'good' || rating === 'useful') ? 'active' : ''}`}
+                    onClick={() => onRatingChange((rating === 'good' || rating === 'useful') ? null : 'useful')}
+                    title={(rating === 'good' || rating === 'useful') ? 'Useful resource (click to remove)' : 'Rate as useful resource'}
                   >
-                    <ThumbsUp size={13} strokeWidth={rating === 'good' ? 2.5 : 1.8} fill={rating === 'good' ? 'currentColor' : 'none'} />
-                    <span>Good</span>
+                    <ThumbsUp size={13} strokeWidth={(rating === 'good' || rating === 'useful') ? 2.5 : 1.8} fill={(rating === 'good' || rating === 'useful') ? 'currentColor' : 'none'} />
+                    <span>Useful</span>
                   </button>
                   <button
                     type="button"
-                    className={`action-btn rating-btn dislike-btn ${rating === 'bad' ? 'active' : ''}`}
-                    onClick={() => onRatingChange(rating === 'bad' ? null : 'bad')}
-                    title={rating === 'bad' ? 'Bad resource (click to remove)' : 'Rate as bad resource'}
+                    className={`action-btn rating-btn dislike-btn ${(rating === 'bad' || rating === 'useless') ? 'active' : ''}`}
+                    onClick={() => onRatingChange((rating === 'bad' || rating === 'useless') ? null : 'useless')}
+                    title={(rating === 'bad' || rating === 'useless') ? 'Useless resource (click to remove)' : 'Rate as useless resource'}
                   >
-                    <ThumbsDown size={13} strokeWidth={rating === 'bad' ? 2.5 : 1.8} fill={rating === 'bad' ? 'currentColor' : 'none'} />
-                    <span>Bad</span>
+                    <ThumbsDown size={13} strokeWidth={(rating === 'bad' || rating === 'useless') ? 2.5 : 1.8} fill={(rating === 'bad' || rating === 'useless') ? 'currentColor' : 'none'} />
+                    <span>Useless</span>
                   </button>
                 </div>
               )}
@@ -325,21 +325,21 @@ export default function ResultCard({
                 <div className="rating-btn-group" style={{ width: 'auto' }}>
                   <button
                     type="button"
-                    className={`action-btn rating-btn like-btn ${rating === 'good' ? 'active' : ''}`}
-                    onClick={() => onRatingChange(rating === 'good' ? null : 'good')}
-                    title={rating === 'good' ? 'Good resource (click to remove)' : 'Rate as good resource'}
+                    className={`action-btn rating-btn like-btn ${(rating === 'good' || rating === 'useful') ? 'active' : ''}`}
+                    onClick={() => onRatingChange((rating === 'good' || rating === 'useful') ? null : 'useful')}
+                    title={(rating === 'good' || rating === 'useful') ? 'Useful resource (click to remove)' : 'Rate as useful resource'}
                   >
-                    <ThumbsUp size={13} strokeWidth={rating === 'good' ? 2.5 : 1.8} fill={rating === 'good' ? 'currentColor' : 'none'} />
-                    <span>Good</span>
+                    <ThumbsUp size={13} strokeWidth={(rating === 'good' || rating === 'useful') ? 2.5 : 1.8} fill={(rating === 'good' || rating === 'useful') ? 'currentColor' : 'none'} />
+                    <span>Useful</span>
                   </button>
                   <button
                     type="button"
-                    className={`action-btn rating-btn dislike-btn ${rating === 'bad' ? 'active' : ''}`}
-                    onClick={() => onRatingChange(rating === 'bad' ? null : 'bad')}
-                    title={rating === 'bad' ? 'Bad resource (click to remove)' : 'Rate as bad resource'}
+                    className={`action-btn rating-btn dislike-btn ${(rating === 'bad' || rating === 'useless') ? 'active' : ''}`}
+                    onClick={() => onRatingChange((rating === 'bad' || rating === 'useless') ? null : 'useless')}
+                    title={(rating === 'bad' || rating === 'useless') ? 'Useless resource (click to remove)' : 'Rate as useless resource'}
                   >
-                    <ThumbsDown size={13} strokeWidth={rating === 'bad' ? 2.5 : 1.8} fill={rating === 'bad' ? 'currentColor' : 'none'} />
-                    <span>Bad</span>
+                    <ThumbsDown size={13} strokeWidth={(rating === 'bad' || rating === 'useless') ? 2.5 : 1.8} fill={(rating === 'bad' || rating === 'useless') ? 'currentColor' : 'none'} />
+                    <span>Useless</span>
                   </button>
                 </div>
               )}
@@ -482,21 +482,21 @@ export default function ResultCard({
               <div className="rating-btn-group">
                 <button
                   type="button"
-                  className={`action-btn rating-btn like-btn ${rating === 'good' ? 'active' : ''}`}
-                  onClick={() => onRatingChange(rating === 'good' ? null : 'good')}
-                  title={rating === 'good' ? 'Good resource (click to remove)' : 'Rate as good resource'}
+                  className={`action-btn rating-btn like-btn ${(rating === 'good' || rating === 'useful') ? 'active' : ''}`}
+                  onClick={() => onRatingChange((rating === 'good' || rating === 'useful') ? null : 'useful')}
+                  title={(rating === 'good' || rating === 'useful') ? 'Useful resource (click to remove)' : 'Rate as useful resource'}
                 >
-                  <ThumbsUp size={13} strokeWidth={rating === 'good' ? 2.5 : 1.8} fill={rating === 'good' ? 'currentColor' : 'none'} />
-                  <span>Good</span>
+                  <ThumbsUp size={13} strokeWidth={(rating === 'good' || rating === 'useful') ? 2.5 : 1.8} fill={(rating === 'good' || rating === 'useful') ? 'currentColor' : 'none'} />
+                  <span>Useful</span>
                 </button>
                 <button
                   type="button"
-                  className={`action-btn rating-btn dislike-btn ${rating === 'bad' ? 'active' : ''}`}
-                  onClick={() => onRatingChange(rating === 'bad' ? null : 'bad')}
-                  title={rating === 'bad' ? 'Bad resource (click to remove)' : 'Rate as bad resource'}
+                  className={`action-btn rating-btn dislike-btn ${(rating === 'bad' || rating === 'useless') ? 'active' : ''}`}
+                  onClick={() => onRatingChange((rating === 'bad' || rating === 'useless') ? null : 'useless')}
+                  title={(rating === 'bad' || rating === 'useless') ? 'Useless resource (click to remove)' : 'Rate as useless resource'}
                 >
-                  <ThumbsDown size={13} strokeWidth={rating === 'bad' ? 2.5 : 1.8} fill={rating === 'bad' ? 'currentColor' : 'none'} />
-                  <span>Bad</span>
+                  <ThumbsDown size={13} strokeWidth={(rating === 'bad' || rating === 'useless') ? 2.5 : 1.8} fill={(rating === 'bad' || rating === 'useless') ? 'currentColor' : 'none'} />
+                  <span>Useless</span>
                 </button>
               </div>
             )}
